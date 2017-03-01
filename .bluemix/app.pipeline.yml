@@ -20,7 +20,7 @@ stages:
       \ in /tmp/settings.xml\n# The name of the snapshots repository is 'snapshots'\n\
       # The name of the release repository is 'releases'\n# The name of the mirror\
       \ repository is 'central'\n\n\n\nmvn -s /tmp/settings.xml -B clean package \n"
-    SERVICE_INSTANCE_TYPE: artifactory
+    SERVICE_INSTANCE_TYPE: nexus
 - name: Test
   inputs:
   - type: job
