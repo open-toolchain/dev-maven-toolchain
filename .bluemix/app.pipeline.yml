@@ -54,7 +54,7 @@ stages:
     script: |
       #!/bin/bash
 
-      cf push "${CF_APP}" --hostname "${CF_APP}" -m 512M -p target/hello-world-1.0.0-SNAPSHOT.war
+      cf push "${CF_APP}" --hostname "${CF_APP}" -m 512M -p target/hello-world-*.war
 - name: System Test [DEV]
   inputs:
   - type: job
