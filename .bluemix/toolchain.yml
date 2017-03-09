@@ -7,6 +7,7 @@ template:
   description: DEV-maven-nexus-scenario3
   required:
     - app-build
+    - app-release
     - app-repo
   info:
     git url: >-
@@ -29,6 +30,19 @@ services:
               PROD_SPACE_NAME: '{{form.pipeline.parameters.prod-space}}'
               PROD_ORG_NAME: '{{form.pipeline.parameters.prod-organization}}'
               PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
+              APP_REPO: app-repo
+            execute: true
+      service_id: pipeline
+    app-release:
+      parameters:
+          services:
+            - app-repo
+          name: 'app-release-{{toolchain.name}}'
+          configuration:
+            content:
+              $ref: rel.pipeline.yml
+              $refType: text
+            env:
               APP_REPO: app-repo
             execute: true
       service_id: pipeline

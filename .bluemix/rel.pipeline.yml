@@ -1,0 +1,35 @@
+---
+stages:
+- name: Release Maven project
+  inputs:
+  - service: ${APP_REPO}
+    type: git
+    branch: master
+  triggers:
+  - enabled: false
+  jobs:
+  - name: Release
+    type: builder
+    extension_id: ibm.devops.services.pipeline.maven.build.deploy
+    SERVICE_INSTANCE: (default)
+    BUILD_COMMAND: |
+      #!/bin/bash
+
+      # Configure an appropriate name/email for git commits
+      git config user.email idsorg@ibm.com
+      git config user.name "IBM DevOps Services"
+
+      # Prepare the release. This depends on the project.scm section using ${scm-connection} property.
+      # This will push 2 commits to the git repo, one with the release version and the other with
+      # incremented SNAPSHOT version.
+      mvn --batch-mode \
+      -Dscm-connection=scm:git:$( git config --get remote.origin.url ) \
+      release:prepare
+
+      # Because our git repo does not define a distributionManagement section, we have to provide
+      # the altDeploymentRepository property to sub-commands of release:perform
+      mvn -Darguments="-DaltDeploymentRepository=releases::default::${MAVEN_RELEASE_URL}" \
+      release:perform
+
+      mvn release:clean
+    SERVICE_INSTANCE_TYPE: nexus
