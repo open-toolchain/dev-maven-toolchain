@@ -11,8 +11,8 @@ template:
     - app-repo
   info:
     git url: >-
-      [https://github.com/paulweb515/dev-maven-toolchain](https://github.com/paulweb515/dev-maven-toolchain)
-    git branch: '[master](https://github.com/paulweb515/dev-maven-toolchain/tree/master)'
+      [https://github.com/open-toolchain/dev-maven-toolchain](https://github.com/open-toolchain/dev-maven-toolchain)
+    git branch: '[master](https://github.com/open-toolchain/dev-maven-toolchain/tree/master)'
 toolchain:
   name: 'DEV-maven-scenario3-{{timestamp}}'
 services:
