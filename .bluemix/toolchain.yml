@@ -1,7 +1,4 @@
 version: '2'
-default_locale: en
-locales:
-  $ref: locales.yml
 template:
   name: DEV-maven-nexus-scenario3
   description: DEV-maven-nexus-scenario3
